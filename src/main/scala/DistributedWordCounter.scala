@@ -138,9 +138,7 @@ object DistributedWordCounter extends App {
                 master ! Initialize(nWorkers)
                 task match {
                     case x: String       => master ! x
-                    case x: List[String] => x.foreach({ text => master ! text
-                                                                Thread.sleep(100)
-                                                      })
+                    case x: List[String] => x.foreach({text => master ! text})
                 }
         }
     }
