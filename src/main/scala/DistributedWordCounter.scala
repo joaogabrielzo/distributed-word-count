@@ -1,3 +1,5 @@
+package exercises
+
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 object DistributedWordCounter extends App {
@@ -16,7 +18,7 @@ object DistributedWordCounter extends App {
         
         override def receive: Receive = {
             case Initialize(n) =>
-                println("Initializing...")
+                println("Initializing...\n")
                 val childrenRefs =
                     for (i <- 1 to n) yield context.actorOf(Props[WordCounterWorker], s"worker-$i")
                 context.become(withChildren(childrenRefs, 0, 0, Map()))
@@ -35,9 +37,13 @@ object DistributedWordCounter extends App {
                 val newRequestMap = requestMap + (currentTaskId -> originalSender)
                 context.become(withChildren(childrenRefs, next, nextTaskId, newRequestMap))
             case WordCountReply(id, count) =>
-                println(s"The count for task #$id is $count")
-                val originalSender = requestMap(id)
-                originalSender ! count
+                println(s"The count for task #$id is:")
+                count foreach { x =>
+                    println(x)
+                    val originalSender = requestMap(id)
+                    originalSender ! x
+                }
+                println("\n")
                 context.become(withChildren(childrenRefs, currentChildIndex, currentTaskId, requestMap - 1))
         }
     }
@@ -73,17 +79,15 @@ object DistributedWordCounter extends App {
                 master ! Initialize(nWorkers)
                 task match {
                     case x: String       => master ! x
-                    case x: List[String] => x.foreach({text =>
-                                                              master ! text
-                                                              Thread.sleep(100)
+                    case x: List[String] => x.foreach({ text => master ! text
+                                                                Thread.sleep(100)
                                                       })
                 }
-            case count: Int                  => println(s"[task reply] The count of words is $count")
         }
     }
     
     val taskManager = system.actorOf(Props[TaskManager], "manager")
     
     taskManager ! TaskManager.requestTask(List("distributed word counter", "two words words", "Ok oK ok OK"), 4)
-
+    
 }
