@@ -1,5 +1,3 @@
-package exercises
-
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 object DistributedWordCounter extends App {

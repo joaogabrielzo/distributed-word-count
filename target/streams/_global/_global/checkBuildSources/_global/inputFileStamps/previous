@@ -1,1 +1,1 @@
-["sbt.Task[scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]",{"hashes":[["/home/zo/dev/distributed-word-count/build.sbt","ac132ec8fec6fef76ee5769028504db7dc3f1cd7"]],"lastModifiedTimes":[]}]
+["sbt.Task[scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]",{"hashes":[["/home/zo/dev/distributed-word-count/build.sbt","322dff7e9730d510926370a278a0b61865f92bee"]],"lastModifiedTimes":[]}]

@@ -1,4 +1,4 @@
-[0m[[0m[33mwarn[0m] [0m[0m/home/zo/dev/akka-practice/src/main/scala/DistributedWordCounter.scala:76:29: non-variable type argument String in type pattern List[String] (the underlying of List[String]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m                    case x: List[String] => x.foreach({text =>[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/zo/dev/distributed-word-count/src/main/scala/DistributedWordCounter.scala:82:29: non-variable type argument String in type pattern List[String] (the underlying of List[String]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m                    case x: List[String] => x.foreach({ text => master ! text[0m
 [0m[[0m[33mwarn[0m] [0m[0m                            ^[0m
 [0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
