@@ -38,7 +38,7 @@ object DistributedWordCounter extends App {
         import WordCounterMaster._
 
         /**
-          * This is the main method of an Actor. It receives a message
+          * This is the main method of an Actor. It receives a message and performs an action.
           * @return Creates the number of workers defined in the Initialize case class
           *         and hotswap to withChildren method
           */
@@ -77,7 +77,6 @@ object DistributedWordCounter extends App {
                     val originalSender = requestMap(id)
                     originalSender ! x
                 }
-                println("\n")
                 context.become(withChildren(childrenRefs, currentChildIndex, currentTaskId, requestMap - 1))
         }
     }
@@ -90,7 +89,7 @@ object DistributedWordCounter extends App {
         import WordCounterMaster._
 
         /**
-          * This is the main method of an Actor. It receives a message
+          * This is the main method of an Actor. It receives a message and performs an action.
           * @return Returns a message to the sender, with the Task ID and a List with the text and it's count
           */
         override def receive: Receive = {
@@ -129,7 +128,7 @@ object DistributedWordCounter extends App {
         import WordCounterMaster._
 
         /**
-          * This is the main method of an Actor. It receives a message
+          * This is the main method of an Actor. It receives a message and performs an action.
           * @return Sends the message to the Master Node
           */
         override def receive: Receive = {
@@ -138,7 +137,7 @@ object DistributedWordCounter extends App {
                 master ! Initialize(nWorkers)
                 task match {
                     case x: String       => master ! x
-                    case x: List[String] => x.foreach({text => master ! text})
+                    case x: List[String] => x.foreach(text => master ! text)
                 }
         }
     }
