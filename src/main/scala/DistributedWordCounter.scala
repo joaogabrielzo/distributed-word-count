@@ -144,6 +144,6 @@ object DistributedWordCounter extends App {
 
     val taskManager = system.actorOf(Props[TaskManager], "manager")
 
-    taskManager ! TaskManager.requestTask(List("distributed word counter", "two words words", "Ok oK ok OK"), 4)
+    taskManager ! TaskManager.requestTask(List("distributed word counter", "two words words", "Ok oK ok OK"), 6)
 
 }
